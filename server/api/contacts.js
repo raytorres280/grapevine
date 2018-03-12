@@ -30,7 +30,7 @@ router.put('/', (req, res, next) => {
 
 // delete
 router.delete('/:id', (req, res, next) => {
-    Contact.delete({ where: { id: req.params.id } })
+    Contact.destroy({ where: { id: req.params.id } })
     .then(contact => {
         res.json(contact)
     })

@@ -12,6 +12,7 @@ export default class Main extends Component {
       newContactMode: false
     };
     this.selectContact = this.selectContact.bind(this)
+    this.handleCreate = this.handleCreate.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
     this.toggleNewContactMode = this.toggleNewContactMode.bind(this)
@@ -24,12 +25,12 @@ export default class Main extends Component {
   }
 
   handleDelete(id) {
-    axios.delete('http://localhost:8080/api/contacts', { id })
+    axios.delete(`http://localhost:8080/api/contacts/${id}`)
     .then(res => res.data)
     .then(data => {
         console.log(data)
         // remove deleted contact from local state
-        this.setState({ contacts: this.state.contacts.filter(contact => contact.id !== id) })
+        this.setState({ contacts: this.state.contacts.filter(contact => contact.id !== id), selectedContact: null })
     })
     .catch(err => console.log(err))
   }
@@ -47,7 +48,17 @@ export default class Main extends Component {
         this.setState({ contacts, selectedContact: data[1][0] })
     })
     .catch(err => console.log(err))
-}
+  }
+  handleCreate(contact) {
+    axios.post('http://localhost:8080/api/contacts', contact)
+    .then(res => res.data)
+    .then(data => {
+        this.setState({ contacts: [...this.state.contacts, data] })
+        this.toggleNewContactMode()
+        this.selectContact(data)
+        
+    })
+  }
   componentDidMount() {
     axios.get('http://localhost:8080/api/contacts')
     .then(res => res.data)
@@ -66,7 +77,8 @@ export default class Main extends Component {
             toggleNewContactMode={this.toggleNewContactMode}
         />
         {
-            this.state.newContactMode ? <NewContactForm /> :
+            this.state.newContactMode ? 
+            <NewContactForm handleCreate={this.handleCreate} /> :
             <ContactDetails
                 contact={this.state.selectedContact}
                 handleEdit={this.handleEdit}

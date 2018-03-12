@@ -14,7 +14,13 @@ export default class NewContactForm extends Component {
           address: ''
       }
   }
-  
+  onCreateButtonPress() {
+      let contact = {...this.state}
+      this.props.handleCreate(contact)
+  }
+  onCancelButtonPress() {
+      this.props.toggleNewContactMode()
+  }
   render() {
     return (
         <div style={styles.container}>
@@ -74,7 +80,7 @@ export default class NewContactForm extends Component {
                     value={this.state.address}
                     onChange={(e) => this.setState({ address: e.target.value })}
                 />
-                <Button style={styles.formBtn} color="primary" variant="raised" onClick={() => this.onSaveButtonPress()}>
+                <Button style={styles.formBtn} color="primary" variant="raised" onClick={() => this.onCreateButtonPress()}>
                     Create
                 </Button>
                 <Button style={styles.formBtn} color="secondary" variant="raised" onClick={() => this.onCancelButtonPress()}>
@@ -89,15 +95,22 @@ export default class NewContactForm extends Component {
 const styles = {
     container: {
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
         width: '75%',
-        overflow: 'scroll'
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column'
     },
-    searchBar: {
-        width: '100%'
+    img: {
+        height: 300,
+        width: 300
     },
-    list: {
-        width: '100%'
+    btn: {
+        diplay: 'flex',
+        width: 300,
+        marginBottom: 10
+    },
+    formBtn: {
+        width: 167,
+        marginBottom: 10
     }
 }
