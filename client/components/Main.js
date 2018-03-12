@@ -29,7 +29,6 @@ export default class Main extends Component {
     axios.delete(`http://localhost:8080/api/contacts/${id}`)
     .then(res => res.data)
     .then(data => {
-        console.log(data)
         // remove deleted contact from local state
         this.setState({ contacts: this.state.contacts.filter(contact => contact.id !== id), selectedContact: null })
     })
@@ -40,7 +39,6 @@ export default class Main extends Component {
     axios.put('http://localhost:8080/api/contacts', contact)
     .then(res => res.data)
     .then(data => {
-        console.log(data)
         // find edited contact in local state and change.
         let contacts = this.state.contacts.map(item => {
             if (item.id === contact.id && data[0]) return data[1][0]
@@ -65,7 +63,6 @@ export default class Main extends Component {
     axios.get('http://localhost:8080/api/contacts')
     .then(res => res.data)
     .then(data => {
-        console.log(data)
         this.setState({ contacts: data })
     })
     .catch(err => console.log(err))

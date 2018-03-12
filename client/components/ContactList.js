@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import SearchBar from './SearchBar';
 import List, { ListItem, ListItemText } from 'material-ui/List';
-import Divider from 'material-ui/Divider';
 import Button from 'material-ui/Button'
 
 export default class ContactList extends Component {
@@ -17,8 +16,8 @@ export default class ContactList extends Component {
       this.setState({ contacts: newProps.contacts })
   }
   searchContacts(searchField) {
-    let results = this.props.contacts.filter(item => 
-        (item.first.toLowerCase().includes(searchField) ||item.last.toLowerCase().includes(searchField)))
+    let results = this.props.contacts.filter(item =>
+        (item.first.toLowerCase().includes(searchField) || item.last.toLowerCase().includes(searchField)))
     this.setState({ contacts: results })
   }
   handleReset() {
@@ -27,7 +26,7 @@ export default class ContactList extends Component {
   _renderContacts() {
       if (this.state.contacts.length < 1) {
         return (
-                <ListItem button onClick={() => this.props.selectContact(item)}>
+                <ListItem>
                     <ListItemText inset primary={'No Data'} />
                 </ListItem>
         )

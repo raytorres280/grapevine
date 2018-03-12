@@ -17,16 +17,6 @@ export default class ContactDetails extends React.Component {
             address: ''
         }
     }
-    componentWillReceiveProps(newProps) {
-        // reset component state whenever
-        // there is a new contact coming in from props
-        this.onCancelButtonPress()
-        // if (newProps.contact) {
-        //     if (newProps.contact.id !== this.props.contact.id) {
-                
-        //     }
-        // }
-    }
     onEditButtonPress() {
         let { first, last, email, phone, address } = this.props.contact
         this.setState({
@@ -39,11 +29,9 @@ export default class ContactDetails extends React.Component {
         })
     }
     onDeleteButtonPress() {
-        console.log('handle delete....')
         this.props.handleDelete(this.props.contact.id)
     }
     onSaveButtonPress() {
-        console.log('handle save....')
         let { first, last, email, phone, address } = this.state
         this.props.handleEdit({
             id: this.props.contact.id,
@@ -55,7 +43,6 @@ export default class ContactDetails extends React.Component {
         })
     }
     onCancelButtonPress() {
-        console.log('cancel changes...')
         this.setState({
             editMode: false,
             first: '',
@@ -77,7 +64,6 @@ export default class ContactDetails extends React.Component {
                     <FormControl style={styles.container}>
                         {
                             Object.keys(this.props.contact).map(key => {
-                                console.log(key !== 'id')
                                 if (key !== 'id' && key !== 'createdAt' && key !== 'updatedAt') {
                                     return (
                                         <TextField
