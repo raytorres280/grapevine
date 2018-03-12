@@ -57,7 +57,8 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        width: '25%'
+        width: '25%',
+        overflow: 'scroll'
     },
     searchBar: {
         width: '100%'
