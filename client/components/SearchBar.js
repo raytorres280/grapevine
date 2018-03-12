@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormControl, FormHelperText } from 'material-ui/Form'
+import { FormControl } from 'material-ui/Form'
 import Input, { InputLabel } from 'material-ui/Input'
 import Button from 'material-ui/Button'
 
@@ -17,7 +17,7 @@ export default class SearchBar extends Component {
     return (
         <div style={styles.container}>
           <FormControl style={styles.container}>
-            <InputLabel htmlFor="name-simple" >Search</InputLabel>
+            <InputLabel htmlFor="name-simple">Search</InputLabel>
             <Input id="name-simple" value={this.state.name} onChange={this.handleChange} />
             <div style={styles.btnContainer}>
               <Button
