@@ -6,10 +6,32 @@ import Divider from 'material-ui/Divider';
 export default class ContactList extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+        contacts: []
+    };
+    this.handleReset = this.handleReset.bind(this)
+    this.searchContacts = this.searchContacts.bind(this)
+  }
+  componentWillReceiveProps(newProps) {
+      this.setState({ contacts: newProps.contacts })
+  }
+  searchContacts(searchField) {
+    let results = this.props.contacts.filter(item => 
+        (item.first.toLowerCase().includes(searchField) ||item.last.toLowerCase().includes(searchField)))
+    this.setState({ contacts: results })
+  }
+  handleReset() {
+      this.setState({ contacts: this.props.contacts })
   }
   _renderContacts() {
-      return this.props.contacts.map(item => (
+      if (this.state.contacts.length < 1) {
+        return (
+            <ListItem button onClick={() => this.props.selectContact(item)}>
+                <ListItemText inset primary={'No Data'} />
+            </ListItem>
+        )
+      }
+      return this.state.contacts.map(item => (
         <ListItem key={item.id} button onClick={() => this.props.selectContact(item)}>
             <ListItemText inset primary={item.first + ' ' + item.last} />
         </ListItem>
@@ -19,8 +41,8 @@ export default class ContactList extends Component {
       console.log(this.props)
     return (
       <div style={styles.container}>
-        <SearchBar />
-        <List>
+        <SearchBar searchContacts={this.searchContacts} handleReset={this.handleReset} />
+        <List style={styles.list} >
             {
                 this._renderContacts()
             }
@@ -33,6 +55,14 @@ export default class ContactList extends Component {
 const styles = {
     container: {
         display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
         width: '25%'
+    },
+    searchBar: {
+        width: '100%'
+    },
+    list: {
+        width: '100%'
     }
 }
