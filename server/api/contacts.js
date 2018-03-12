@@ -5,7 +5,10 @@ module.exports = router
 // read
 router.get('/', (req, res, next) => {
   Contact.findAll()
-    .then(contacts => res.json(contacts))
+    .then(contacts => {
+        console.log(contacts)
+        res.json(contacts)
+    })
     .catch(next)
 })
 
