@@ -14,7 +14,6 @@ export default class Main extends Component {
     this.selectContact = this.selectContact.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
-    this.openNewContactForm = this.openNewContactForm.bind(this)
     this.toggleNewContactMode = this.toggleNewContactMode.bind(this)
   }
   toggleNewContactMode() {
@@ -22,17 +21,6 @@ export default class Main extends Component {
   }
   selectContact(contact) {
     this.setState({ selectedContact: contact })
-  }
-  openNewContactForm() {
-      this.setState({
-          selectedContact: {
-              first: '',
-              last: '',
-              email: '',
-              phone: '',
-              address: ''
-          }
-        })
   }
 
   handleDelete(id) {
@@ -75,7 +63,6 @@ export default class Main extends Component {
         <ContactList
             contacts={this.state.contacts}
             selectContact={this.selectContact}
-            openNewContactForm={this.openNewContactForm}
             toggleNewContactMode={this.toggleNewContactMode}
         />
         {

@@ -47,7 +47,7 @@ export default class ContactList extends Component {
             {
                 this._renderContacts()
             }
-            <Button onClick={() => this.props.openNewContactForm()} variant="fab" color="primary">+</Button>
+            <Button onClick={() => this.props.toggleNewContactMode()} variant="fab" color="primary">+</Button>
         </List>
       </div>
     );

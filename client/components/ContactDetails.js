@@ -2,8 +2,7 @@ import React from 'react'
 import List, { ListItem, ListItemText } from 'material-ui/List'
 import Divider from 'material-ui/Divider'
 import Button from 'material-ui/Button'
-import { FormControl, FormHelperText } from 'material-ui/Form'
-import Input, { InputLabel } from 'material-ui/Input'
+import { FormControl } from 'material-ui/Form'
 import TextField from 'material-ui/TextField'
 
 export default class ContactDetails extends React.Component {
