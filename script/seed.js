@@ -21,9 +21,22 @@ async function seed () {
   const contacts = await Promise.all([
     Contact.create({first: 'John', last: 'Doe', email: 'johndoe@email.com', address: '1 hello world blvd', phone: '1234567890'}),
     Contact.create({first: 'Forrest', last: 'Gump', email: 'Forrest@shrimp.com', address: '1 hello world blvd', phone: '1234567890'}),
-    Contact.create({first: 'Bubba', last: '', email: 'Bubba@shrimp.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Bubba', last: 'Gump', email: 'Bubba@shrimp.com', address: '1 hello world blvd', phone: '1234567890'}),
     Contact.create({first: 'Jenny', last: 'Gump', email: 'Jenny@shrimp.com', address: '1 hello world blvd', phone: '1234567890'}),
     Contact.create({first: 'Lt', last: 'Dan', email: 'ltdan@shrimp.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Hello', last: 'World', email: 'hello@world.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Outta', last: 'Names', email: 'outta@names.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Fiji', last: 'Water', email: 'water@fiji.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Hungry', last: 'Hippos', email: 'hungry@hippos.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Samsung', last: 'Monitor', email: 'monitor@samsung.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Kanye', last: 'West', email: 'kanye@yeezy.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Kim', last: 'K', email: 'kim@yeezy.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Black', last: 'Panther', email: 'panther@marvel.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Big', last: 'Mac', email: 'mac@mcdonalds.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Brian', last: 'OConnor', email: 'brian@fast.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Jon', last: 'Snow', email: 'Jon@knownothing.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Danaerys', last: 'Targaryen', email: 'mum@dragons.com', address: '1 hello world blvd', phone: '1234567890'}),
+    Contact.create({first: 'Ice', last: 'King', email: 'king@cold.com', address: '1 hello world blvd', phone: '1234567890'}),
   ])
   // Wowzers! We can even `await` on the right-hand side of the assignment operator
   // and store the result that the promise resolves to in a variable! This is nice!

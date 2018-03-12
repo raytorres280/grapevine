@@ -39,16 +39,15 @@ export default class ContactList extends Component {
       ))
   }
   render() {
-      console.log(this.props)
     return (
       <div style={styles.container}>
         <SearchBar searchContacts={this.searchContacts} handleReset={this.handleReset} />
-        <List style={styles.list} >
+        <List style={styles.list}>
             {
                 this._renderContacts()
             }
-            <Button onClick={() => this.props.toggleNewContactMode()} variant="fab" color="primary">+</Button>
         </List>
+        <Button iconClassName="" onClick={() => this.props.toggleNewContactMode()} variant="fab" color="primary">+</Button>
       </div>
     );
   }
@@ -60,12 +59,14 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'center',
         width: '25%',
-        overflow: 'scroll'
+        maxHeight: '75%',
     },
     searchBar: {
         width: '100%'
     },
     list: {
-        width: '100%'
+        width: '100%',
+        maxHeight: '75%',
+        overflowY: 'scroll'
     }
 }

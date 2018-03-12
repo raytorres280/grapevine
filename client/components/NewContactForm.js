@@ -11,17 +11,26 @@ export default class NewContactForm extends Component {
           last: '',
           email: '',
           phone: '',
-          address: ''
+          address: '',
+          showErr: false,
       }
   }
   onCreateButtonPress() {
       let contact = {...this.state}
-      this.props.handleCreate(contact)
+      if (this.state.first.length < 1 || this.state.last.length < 1) {
+        this.setState({ showErr: true })
+    } else {
+        this.props.handleCreate(contact)
+    }
   }
   onCancelButtonPress() {
       this.props.toggleNewContactMode()
   }
   render() {
+      let errMsg = null
+      if (this.state.showErr) {
+          errMsg = <h3>Please fill at least a first and last name.</h3>
+      }
     return (
         <div style={styles.container}>
             <img
@@ -29,6 +38,9 @@ export default class NewContactForm extends Component {
                 src="profile_placeholder.png"
                 alt="Mountain View"
             />
+            {
+                errMsg
+            }
             <FormControl style={styles.container}>
                 <TextField
                     id="first"

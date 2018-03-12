@@ -4,9 +4,8 @@ module.exports = router
 
 // read
 router.get('/', (req, res, next) => {
-  Contact.findAll()
+  Contact.findAll({ order: ['last'] })
     .then(contacts => {
-        console.log(contacts)
         res.json(contacts)
     })
     .catch(next)

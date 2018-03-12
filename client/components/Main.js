@@ -3,6 +3,7 @@ import axios from 'axios'
 import ContactList from './ContactList';
 import ContactDetails from './ContactDetails';
 import NewContactForm from './NewContactForm'
+import arraySort from 'array-sort'
 export default class Main extends Component {
   constructor(props) {
     super(props);
@@ -45,6 +46,7 @@ export default class Main extends Component {
             if (item.id === contact.id && data[0]) return data[1][0]
             else return item
         })
+        contacts = arraySort(contacts, 'last')
         this.setState({ contacts, selectedContact: data[1][0] })
     })
     .catch(err => console.log(err))
@@ -53,7 +55,7 @@ export default class Main extends Component {
     axios.post('http://localhost:8080/api/contacts', contact)
     .then(res => res.data)
     .then(data => {
-        this.setState({ contacts: [...this.state.contacts, data] })
+        this.setState({ contacts: arraySort([...this.state.contacts, data], 'last') })
         this.toggleNewContactMode()
         this.selectContact(data)
         
@@ -94,6 +96,6 @@ const styles = {
     container: {
         display: 'flex',
         width: '100%',
-        height: '100%'
+        maxHeight: '100%'
     }
 }
