@@ -8,3 +8,4 @@ I went with Postgres for my database, install from here if you have a mac: https
 2. go to project directory and install packages, `npm i`
 3. `npm run seed`
 4. `npm run start-dev`
+5. Open browser to localhost:8080
