@@ -21,14 +21,18 @@ router.post('/', (req, res, next) => {
 
 // update
 router.put('/', (req, res, next) => {
-    Contact.create({})
-    .then(contact => res.json(contact))
+    Contact.update(req.body, { where: { id: req.body.id }, returning: true })
+    .then(response => {
+        res.json(response)
+    })
     .catch(err => console.log(err))
 })
 
 // delete
-router.post('/', (req, res, next) => {
-    Contact.create({})
-    .then(contact => res.json(contact))
+router.delete('/:id', (req, res, next) => {
+    Contact.delete({ where: { id: req.params.id } })
+    .then(contact => {
+        res.json(contact)
+    })
     .catch(err => console.log(err))
 })

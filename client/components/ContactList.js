@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SearchBar from './SearchBar';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
+import Button from 'material-ui/Button'
 
 export default class ContactList extends Component {
   constructor(props) {
@@ -26,9 +27,9 @@ export default class ContactList extends Component {
   _renderContacts() {
       if (this.state.contacts.length < 1) {
         return (
-            <ListItem button onClick={() => this.props.selectContact(item)}>
-                <ListItemText inset primary={'No Data'} />
-            </ListItem>
+                <ListItem button onClick={() => this.props.selectContact(item)}>
+                    <ListItemText inset primary={'No Data'} />
+                </ListItem>
         )
       }
       return this.state.contacts.map(item => (
@@ -46,6 +47,7 @@ export default class ContactList extends Component {
             {
                 this._renderContacts()
             }
+            <Button onClick={() => this.props.openNewContactForm()} variant="fab" color="primary">+</Button>
         </List>
       </div>
     );

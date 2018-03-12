@@ -2,40 +2,61 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import ContactList from './ContactList';
 import ContactDetails from './ContactDetails';
+import NewContactForm from './NewContactForm'
 export default class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selectedContact: null,
-      contacts: []
+      contacts: [],
+      newContactMode: false
     };
     this.selectContact = this.selectContact.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
+    this.handleEdit = this.handleEdit.bind(this)
+    this.openNewContactForm = this.openNewContactForm.bind(this)
+    this.toggleNewContactMode = this.toggleNewContactMode.bind(this)
   }
-
+  toggleNewContactMode() {
+      this.setState({ newContactMode: !this.state.newContactMode })
+  }
   selectContact(contact) {
     this.setState({ selectedContact: contact })
   }
+  openNewContactForm() {
+      this.setState({
+          selectedContact: {
+              first: '',
+              last: '',
+              email: '',
+              phone: '',
+              address: ''
+          }
+        })
+  }
 
-  handleDelete() {
-    axios.delete('http://localhost:8080/api/contacts', {
-
-    })
+  handleDelete(id) {
+    axios.delete('http://localhost:8080/api/contacts', { id })
     .then(res => res.data)
     .then(data => {
         console.log(data)
-        this.setState({ contacts: data })
+        // remove deleted contact from local state
+        this.setState({ contacts: this.state.contacts.filter(contact => contact.id !== id) })
     })
     .catch(err => console.log(err))
   }
 
-  handleEdit() {
-    axios.put('http://localhost:8080/api/contacts', {
-        
-    })
+  handleEdit(contact) {
+    axios.put('http://localhost:8080/api/contacts', contact)
     .then(res => res.data)
     .then(data => {
         console.log(data)
-        this.setState({ contacts: data })
+        // find edited contact in local state and change.
+        let contacts = this.state.contacts.map(item => {
+            if (item.id === contact.id && data[0]) return data[1][0]
+            else return item
+        })
+        this.setState({ contacts, selectedContact: data[1][0] })
     })
     .catch(err => console.log(err))
 }
@@ -54,12 +75,17 @@ export default class Main extends Component {
         <ContactList
             contacts={this.state.contacts}
             selectContact={this.selectContact}
+            openNewContactForm={this.openNewContactForm}
+            toggleNewContactMode={this.toggleNewContactMode}
         />
-        <ContactDetails
-            contact={this.state.selectedContact}
-            handleEdit={this.handleEdit}
-            handleDelete={this.handleDelete}
-        />
+        {
+            this.state.newContactMode ? <NewContactForm /> :
+            <ContactDetails
+                contact={this.state.selectedContact}
+                handleEdit={this.handleEdit}
+                handleDelete={this.handleDelete}
+            />
+        }
       </div>
     );
   }

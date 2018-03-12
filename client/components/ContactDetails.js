@@ -18,6 +18,16 @@ export default class ContactDetails extends React.Component {
             address: ''
         }
     }
+    componentWillReceiveProps(newProps) {
+        // reset component state whenever
+        // there is a new contact coming in from props
+        this.onCancelButtonPress()
+        // if (newProps.contact) {
+        //     if (newProps.contact.id !== this.props.contact.id) {
+                
+        //     }
+        // }
+    }
     onEditButtonPress() {
         let { first, last, email, phone, address } = this.props.contact
         this.setState({
@@ -31,12 +41,12 @@ export default class ContactDetails extends React.Component {
     }
     onDeleteButtonPress() {
         console.log('handle delete....')
-        this.props.handleDelete(this.props.contact)
+        this.props.handleDelete(this.props.contact.id)
     }
     onSaveButtonPress() {
         console.log('handle save....')
         let { first, last, email, phone, address } = this.state
-        this.props.handleSave({
+        this.props.handleEdit({
             id: this.props.contact.id,
             first,
             last,
@@ -80,7 +90,11 @@ export default class ContactDetails extends React.Component {
                                             }}
                                             margin="normal"
                                             value={this.state[key]}
-                                            onChange={(e) => this.setState({ key: e.target.value })}
+                                            onChange={(e) => {
+                                                let state = {}
+                                                state[key] = e.target.value
+                                                this.setState(state)
+                                            }}
                                         />
                                     )
                                 }
@@ -105,18 +119,22 @@ export default class ContactDetails extends React.Component {
                     />
                     <List>
                         {
-                            Object.keys(this.props.contact).map(key => (
-                                <div key={key}>
-                                    <ListItem>
-                                        <ListItemText
-                                            inset
-                                            primary={key}
-                                            secondary={this.props.contact[key]}
-                                        />
-                                    </ListItem>
-                                    <Divider />
-                                </div>
-                            ))
+                            Object.keys(this.props.contact).map(key => {
+                                if (key !== 'id' && key !== 'createdAt' && key !== 'updatedAt') {
+                                    return (
+                                        <div key={key}>
+                                            <ListItem>
+                                                <ListItemText
+                                                    inset
+                                                    primary={key}
+                                                    secondary={this.props.contact[key]}
+                                                />
+                                            </ListItem>
+                                            <Divider />
+                                        </div>
+                                    )
+                                }
+                            })
                         }
                     </List>
                         <Button
@@ -138,7 +156,6 @@ export default class ContactDetails extends React.Component {
                 </div>
             )
         } else {
-            
             return (
                 <h1>no data</h1>
             )

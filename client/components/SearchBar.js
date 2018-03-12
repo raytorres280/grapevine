@@ -10,15 +10,12 @@ export default class SearchBar extends Component {
       name: ''
     };
   }
-  handleChange = event => {
-    this.setState({ name: event.target.value });
-  };
   render() {
     return (
         <div style={styles.container}>
           <FormControl style={styles.container}>
             <InputLabel htmlFor="name-simple">Search</InputLabel>
-            <Input id="name-simple" value={this.state.name} onChange={this.handleChange} />
+            <Input id="name-simple" value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
             <div style={styles.btnContainer}>
               <Button
                 color="secondary"
